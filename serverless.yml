@@ -1,0 +1,19 @@
+service: twilio-whatsapp
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: test
+region: us-east-1
+functions:
+  TwilioIncommingMessage:
+    handler: receive-messages/receiveTwilioMsg.start
+    name: ReceiveTwilio-lambda-test
+    events: 
+      - http: 
+          path: '/whatsapp/webhook/'
+          method: 'post'
+          cors: 
+            - enabled: true
+            - origin: '*'
+            - headers:  
+              - Content-Type
